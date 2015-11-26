@@ -1,0 +1,2 @@
+﻿MSVCRTD.lib(cinitexe.obj) : warning LNK4098: библиотека по умолчанию "msvcrt.lib" противоречит использованию других библиотек; используйте параметр /NODEFAULTLIB:library
+  Проект22.vcxproj -> C:\Users\Denis\documents\visual studio 2013\Projects\Проект22\Debug\Проект22.exe
