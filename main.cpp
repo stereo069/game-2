@@ -31,24 +31,33 @@ int main(int argc, char* argv[])
 	SDL_Event event;
 	while (!done)
 	{
-		while (SDL_PollEvent(&event)) // Пока есть хоть одно необработанное событие
-		{
-			{
+		(SDL_PollEvent(&event)); // Пока есть хоть одно необработанное событие
+		
 				SDL_RenderClear(ren);
 				SDL_RenderCopy(ren, tex, NULL, NULL);
 				SDL_RenderPresent(ren);
 				SDL_Delay(100);
 
-			}
+			
 
 
-			switch (event.type)
-			{
-			case SDL_QUIT: // Событие выхода
-				done = true;
-			}
+				switch (event.type)
+				{
+				case SDL_MOUSEBUTTONDOWN:
+				{
+					if (event.button.button = SDL_BUTTON_LEFT)
+					{
+						int x = event.button.x, y = event.button.y; // Координаты клика
+						if (x > 100)
+							done = true;
+					}
+					break;
+				}
+				case SDL_QUIT: // Событие выхода
+					done = true;
+				}
 		}
-	}
+
 	SDL_DestroyTexture(tex);
 	SDL_DestroyRenderer(ren);
 	SDL_DestroyWindow(win);
