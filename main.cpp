@@ -6,7 +6,7 @@
 int main(int argc, char* argv[])
 {
 
-	SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 480, 480, SDL_WINDOW_RESIZABLE);
+	SDL_Window *win = SDL_CreateWindow("CROSS AND ROUND", 100, 100, 480, 480, NULL);
 	if (win == nullptr){
 		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
 		return 1;
@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 		std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
 		return 1;
 	}
-	SDL_Surface *bmp = SDL_LoadBMP("hello.bmp");
+	SDL_Surface *bmp = SDL_LoadBMP("blue.bmp");
 	if (bmp == nullptr){
 		std::cout << "SDL_LoadBMP Error: " << SDL_GetError() << std::endl;
 		return 1;
@@ -27,15 +27,31 @@ int main(int argc, char* argv[])
 		std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
 		return 1;
 	}
-	SDL_RenderClear(ren);
-	SDL_RenderCopy(ren, tex, NULL, NULL);
-	SDL_RenderPresent(ren);
+	bool done=false;
+	SDL_Event event;
+	while (!done)
+	{
+		while (SDL_PollEvent(&event)) // Пока есть хоть одно необработанное событие
+		{
+			{
+				SDL_RenderClear(ren);
+				SDL_RenderCopy(ren, tex, NULL, NULL);
+				SDL_RenderPresent(ren);
+				SDL_Delay(100);
 
-	SDL_Delay(200);
-	_getch();
+			}
+
+
+			switch (event.type)
+			{
+			case SDL_QUIT: // Событие выхода
+				done = true;
+			}
+		}
+	}
 	SDL_DestroyTexture(tex);
 	SDL_DestroyRenderer(ren);
 	SDL_DestroyWindow(win);
-	SDL_Quit();
+
 	return 0;
 }
