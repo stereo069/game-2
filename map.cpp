@@ -78,7 +78,7 @@ bool map::game()
 	while (done)
 	{
 		SDL_RenderPresent(renderer);
-		SDL_Delay(19);
+		SDL_Delay(30);
 		SDL_WaitEvent(&event);
 
 		switch(event.type)

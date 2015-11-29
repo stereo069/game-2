@@ -16,6 +16,7 @@ int main(int argc, char* argv[])
 		map *test = new map;
 		done = test->game();
 		delete test;
+		SDL_Delay(200);
 	}
 	return 0;
 }
